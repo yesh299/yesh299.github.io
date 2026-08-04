@@ -10,7 +10,7 @@ const About = () => {
 
   const stats = [
     { label: 'BCA Student', value: '2nd Year', icon: HiAcademicCap },
-    { label: 'CGPA', value: '9.23', icon: HiAcademicCap },
+    { label: 'CGPA', value: '8.96', icon: HiAcademicCap },
     { label: 'Location', value: personalInfo.location, icon: HiLocationMarker },
     { label: 'Projects', value: '7+', icon: HiCode },
   ];
