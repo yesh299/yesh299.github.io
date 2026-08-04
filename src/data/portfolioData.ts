@@ -94,15 +94,6 @@ export const projects = [
     githubUrl: "https://github.com/yesh299",
     image: "/quiz app.png",
   },
-  {
-    id: 5,
-    title: "Hand written Notes App text",
-    description: "One-stop platform for high-quality handwritten notes, interview questions, cheat sheets, and study resources. Learn faster, prepare smarter, and download notes for Java, Python, DSA, DBMS, OS, Web Development, Aptitude, and more—all in one place.",
-    techStack: ["React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "notes-app-alpha-opal.vercel.app",
-    githubUrl: "https://github.com/yesh299",
-    image: "/dist/notes.png",
-  }
 ];
 
 export const experience = {
