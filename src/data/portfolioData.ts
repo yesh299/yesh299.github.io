@@ -103,7 +103,7 @@ export const experience = {
 export const education = {
   degree: "Bachelor of Computer Applications",
   institution: "Amity University Jharkhand",
-  cgpa: "9.23",
+   cgpa: "8.96",
   schooling: [
     { level: "10th", year: "2022-23", percentage: "80.25%", },
     { level: "12th", year: "2024-25", percentage: "81.47%" },
