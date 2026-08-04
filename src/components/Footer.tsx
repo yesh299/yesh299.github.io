@@ -42,6 +42,14 @@ const Footer = () => {
               LinkedIn
             </a>
             <a
+              href={socialLinks.Vercel}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors text-sm"
+            >
+              Vercel
+            </a>
+            <a
               href={`mailto:${socialLinks.email}`}
               className="text-gray-400 hover:text-white transition-colors text-sm"
             >
