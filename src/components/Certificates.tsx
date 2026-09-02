@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiX, HiZoomIn } from 'react-icons/hi';
-import { certificates } from '../data/portfolioData';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HiX, HiZoomIn } from "react-icons/hi";
+import { certificates } from "../data/portfolioData";
 
 const Certificates = () => {
-  const [selected, setSelected] = useState<{ title: string; image: string; description: string } | null>(null);
+  const [selected, setSelected] = useState<{
+    title: string;
+    image: string;
+    description: string;
+  } | null>(null);
 
   return (
     <section id="certificates" className="py-20 md:py-28 relative">
@@ -16,12 +20,14 @@ const Certificates = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-heading">
-            My <span className="gradient-text" style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.02em' }}>Certificates</span>
+            My <span className="gradient-text font-display">Certificates</span>
           </h2>
-          <p className="section-subtitle" style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: '0.05em', fontWeight: 500 }}>Professional certifications & training I've completed</p>
+          <p className="section-subtitle">
+            Professional certifications & training I've completed
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificates.map((cert, index) => (
             <motion.div
               key={cert.title}
@@ -50,16 +56,10 @@ const Certificates = () => {
 
               {/* Title + Description */}
               <div className="p-4">
-                <h3
-                  className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 group-hover:from-white group-hover:to-white transition-all text-center leading-snug"
-                  style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: '0.03em' }}
-                >
+                <h3 className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary group-hover:from-white group-hover:to-white transition-all text-center leading-snug">
                   {cert.title}
                 </h3>
-                <p
-                  className="text-xs text-gray-500 group-hover:text-gray-300 transition-colors text-center mt-1.5 leading-relaxed"
-                  style={{ fontFamily: "'Poppins', sans-serif", fontStyle: 'italic' }}
-                >
+                <p className="text-xs text-gray-500 group-hover:text-gray-300 transition-colors text-center mt-1.5 leading-relaxed">
                   {cert.description}
                 </p>
               </div>
@@ -83,7 +83,7 @@ const Certificates = () => {
 
             {/* Modal Content */}
             <motion.div
-              className="relative z-10 max-w-4xl w-full"
+              className="certificate-modal relative z-10 w-full max-w-2xl"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
@@ -102,14 +102,11 @@ const Certificates = () => {
               <img
                 src={selected.image}
                 alt={selected.title}
-                className="w-full h-auto rounded-2xl shadow-2xl border border-white/10"
+                className="certificate-modal-image mx-auto h-auto max-h-[72vh] max-w-full rounded-2xl border border-white/10 object-contain shadow-2xl"
               />
 
               {/* Title */}
-              <p
-                className="text-center font-bold mt-4 text-xl gradient-text"
-                style={{ fontFamily: "'Playfair Display', serif", letterSpacing: '0.03em' }}
-              >
+              <p className="text-center font-bold mt-4 text-xl gradient-text font-display">
                 {selected.title}
               </p>
             </motion.div>

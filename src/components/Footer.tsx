@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { personalInfo, socialLinks } from '../data/portfolioData';
+import { motion } from "framer-motion";
+import { personalInfo, socialLinks } from "../data/portfolioData";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,8 +14,10 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <p className="text-gray-400 text-sm">
-              Made with <span className="text-red-500">❤️</span> by{' '}
-              <span className="gradient-text font-medium">{personalInfo.name}</span>
+              Made with <span className="text-secondary">❤️</span> by{" "}
+              <span className="gradient-text font-medium">
+                {personalInfo.name}
+              </span>
             </p>
           </motion.div>
 

@@ -1,27 +1,39 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenu, HiX } from 'react-icons/hi';
-import { personalInfo } from '../data/portfolioData';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HiMenu, HiX } from "react-icons/hi";
+import { personalInfo } from "../data/portfolioData";
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Certificates', href: '#certificates' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Projects", href: "#projects" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState('#home');
+  const [activeLink, setActiveLink] = useState("#home");
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    const darkMode = savedTheme ? savedTheme === "dark" : prefersDark;
+
+    document.documentElement.classList.toggle("dark", darkMode);
+    setIsDark(darkMode);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      const sections = navLinks.map(link => link.href.slice(1));
+      const sections = navLinks.map((link) => link.href.slice(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
         if (element) {
@@ -34,8 +46,8 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleClick = (href: string) => {
@@ -43,9 +55,16 @@ const Navbar = () => {
     setTimeout(() => {
       const element = document.querySelector(href);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }, 300);
+  };
+
+  const toggleTheme = () => {
+    const nextIsDark = !isDark;
+    document.documentElement.classList.toggle("dark", nextIsDark);
+    localStorage.setItem("theme", nextIsDark ? "dark" : "light");
+    setIsDark(nextIsDark);
   };
 
   return (
@@ -54,31 +73,42 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${
-        scrolled ? 'glass shadow-lg shadow-black/10' : 'bg-transparent'
+        scrolled ? "glass shadow-lg shadow-black/10" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <motion.a
             href="#home"
-            onClick={(e) => { e.preventDefault(); handleClick('#home'); }}
-            className="text-xl md:text-2xl font-bold gradient-text cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick("#home");
+            }}
+            className="brand-mark flex items-center gap-3 cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            {personalInfo.name.split(' ')[0]}<span className="text-white">.</span>
+            <img
+              src="/profile picture.jpeg"
+              alt={personalInfo.name}
+              className="h-10 w-10 rounded-full border-2 border-indigo-400/40 object-cover shadow-md shadow-indigo-500/20"
+            />
+            <span className="brand-name">Yesh</span>
           </motion.a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="nav-pill hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => { e.preventDefault(); handleClick(link.href); }}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClick(link.href);
+                }}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeLink === link.href
-                    ? 'text-white bg-white/10'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? "text-white bg-white/10"
+                    : "text-gray-400 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {link.name}
@@ -86,14 +116,32 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className={`theme-toggle ${isDark ? "is-on" : ""}`}
+              aria-label={
+                isDark ? "Switch to light mode" : "Switch to dark mode"
+              }
+              title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <span className="theme-toggle-track" aria-hidden="true">
+                <span className="theme-toggle-knob" />
+              </span>
+              <span className="theme-toggle-label">
+                {isDark ? "ON" : "OFF"}
+              </span>
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -106,7 +154,10 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
             className="md:hidden border-t border-white/10"
-            style={{ background: 'rgba(5, 10, 20, 0.98)', backdropFilter: 'blur(20px)' }}
+            style={{
+              background: "rgba(255, 255, 255, 0.98)",
+              backdropFilter: "blur(20px)",
+            }}
           >
             <div className="px-4 py-4 space-y-1">
               {navLinks.map((link) => (
@@ -115,8 +166,8 @@ const Navbar = () => {
                   onClick={() => handleClick(link.href)}
                   className={`w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeLink === link.href
-                      ? 'text-white bg-white/10'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      ? "text-white bg-white/10"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   {link.name}

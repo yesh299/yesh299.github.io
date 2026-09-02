@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HiArrowUp } from 'react-icons/hi';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Certificates from './components/Certificates';
-import Services from './components/Services';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import { useScrollProgress } from './hooks/useScrollProgress';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { HiArrowUp } from "react-icons/hi";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Experience from "./components/Experience";
+import Certificates from "./components/Certificates";
+import Services from "./components/Services";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import { useScrollProgress } from "./hooks/useScrollProgress";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -29,12 +29,12 @@ const App = () => {
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 500);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -82,22 +82,24 @@ const App = () => {
       <div className="custom-cursor-dot" id="cursorDot" />
 
       {/* Main Content */}
-      <div className={`transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}>
+      <div
+        className={`transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100 page-enter"}`}
+      >
         <Navbar />
         <Hero />
         <About />
         <Skills />
+        <Services />
         <Projects />
         <Experience />
         <Certificates />
-        <Services />
         <Contact />
         <Footer />
       </div>
 
       {/* Back to Top Button */}
       <motion.button
-        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        className={`back-to-top ${showBackToTop ? "visible" : ""}`}
         onClick={scrollToTop}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

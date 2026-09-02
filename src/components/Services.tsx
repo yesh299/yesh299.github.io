@@ -1,9 +1,19 @@
-import { motion } from 'framer-motion';
-import { HiCode, HiDeviceMobile, HiCube, HiServer, HiColorSwatch } from 'react-icons/hi';
-import { services } from '../data/portfolioData';
+import { motion } from "framer-motion";
+import {
+  HiCode,
+  HiDeviceMobile,
+  HiCube,
+  HiServer,
+  HiColorSwatch,
+} from "react-icons/hi";
+import { services } from "../data/portfolioData";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  HiCode, HiDeviceMobile, HiCube, HiServer, HiColorSwatch,
+  HiCode,
+  HiDeviceMobile,
+  HiCube,
+  HiServer,
+  HiColorSwatch,
 };
 
 const Services = () => {
@@ -16,6 +26,7 @@ const Services = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          <p className="section-label">What I Offer</p>
           <h2 className="section-heading">
             <span className="gradient-text">Services</span>
           </h2>
@@ -33,7 +44,7 @@ const Services = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
-                className="glass-card p-6 md:p-8 group"
+                className="glass-card service-card p-6 md:p-8 group"
               >
                 <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-5 group-hover:from-primary/20 group-hover:to-secondary/20 transition-all">
                   {Icon && <Icon className="w-7 h-7 text-primary" />}
@@ -44,6 +55,9 @@ const Services = () => {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {service.description}
                 </p>
+                <span className="service-arrow" aria-hidden="true">
+                  ↗
+                </span>
               </motion.div>
             );
           })}
