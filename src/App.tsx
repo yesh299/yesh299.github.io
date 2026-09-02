@@ -82,10 +82,10 @@ const App = () => {
       <div className="custom-cursor-dot" id="cursorDot" />
 
       {/* Main Content */}
+      <Navbar />
       <div
         className={`transition-opacity duration-500 ${loading ? "opacity-0" : "opacity-100 page-enter"}`}
       >
-        <Navbar />
         <Hero />
         <About />
         <Skills />

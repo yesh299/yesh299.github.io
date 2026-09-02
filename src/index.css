@@ -1415,6 +1415,40 @@ textarea::placeholder {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  section[id] {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #home {
+    min-height: auto;
+  }
+
+  .hero-layout {
+    min-height: auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .about-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .about-grid {
+    gap: 2rem;
+  }
+
+  .about-image-frame {
+    width: 18rem !important;
+    height: 18rem !important;
+  }
+
+  .section-subtitle {
+    margin-bottom: 1.25rem !important;
+  }
+}
+
 /* Final theme typography and action colors */
 body,
 button,
@@ -1938,10 +1972,14 @@ html.dark footer {
 }
 
 @media (max-width: 767px) {
+  #home {
+    min-height: auto;
+  }
+
   .hero-layout {
     min-height: auto;
     padding-top: 3rem;
-    padding-bottom: 5rem;
+    padding-bottom: 1.5rem;
   }
   .section-heading-left {
     text-align: center;
